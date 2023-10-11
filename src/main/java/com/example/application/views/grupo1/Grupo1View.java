@@ -26,7 +26,6 @@ public class Grupo1View extends VerticalLayout {
 
         setAlignItems(Alignment.CENTER);
         setSizeFull();
-       
 
         VerticalLayout vl = new VerticalLayout();
         vl.setJustifyContentMode(JustifyContentMode.CENTER);
@@ -101,37 +100,23 @@ public class Grupo1View extends VerticalLayout {
         hl.setAlignItems(Alignment.CENTER);
         hl.setWidthFull();
 
-        NumberField peso = new NumberField("Peso (kg)");
-        NumberField altura = new NumberField("Altura (m)");
-        Button calcular = new Button("Calcular IMC");
-        H3 salida = new H3();
+         H1 t1 = new H1("Calculadora");
 
-        calcular.addClickListener(event -> {
-            double valorPeso = peso.getValue();
-            double valorAltura = altura.getValue();
-            double imc = valorPeso / Math.pow(valorAltura, 2);
-            String info = "";
-            if (imc < 18.5) {
-                info = "Bajo peso";
-            } else if (imc >= 18.5 && imc < 24.9) {
-                info = "Peso saludable";
-            } else if (imc >= 25.0 && imc < 29.9) {
-                info = "Sobrepeso";
-            } else if (imc >= 30.0 && imc < 34.9) {
-                info = "Obesidad Clase 1";
-            } else if (imc >= 35.0 && imc < 39.9) {
-                info = "Obesidad Clase 2";
-            } else {
-                info = "Obesidad Clase 3";
-            }
-            String numeroFormateado = String.format("%.2f", imc);
-            salida.setText(String.valueOf(numeroFormateado + ", " + info));
+        H1 mensaje = new H1("0");
+
+        NumberField NFRadio = new NumberField("Radio");
+
+        Button btnCalcular = new Button("Calcular");
+        btnCalcular.addClickListener(event -> {
+            double valorRadio = NFRadio.getValue();
+            double result = (4.0 / 3.0) * Math.PI * Math.pow(valorRadio, 3);
+            mensaje.setText("El volumen: "+ String.valueOf(result));
         });
-        vl2.add(new H3("Calculadora Índice de Masa Corporal (IMC)"));
-        vl2.add(peso);
-        vl2.add(altura);
-        vl2.add(calcular);
-        vl2.add(salida);
+
+        vl2.add(t1);
+        vl2.add(NFRadio);
+        vl2.add(btnCalcular);
+        vl2.add(mensaje);
         hl.add(vl1);
         hl.add(vl2);
         return hl;
